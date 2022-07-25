@@ -1,0 +1,19 @@
+/*Base*/
+@import url('./base/color.scss');
+@import url('./base/fonts.scss');
+@import url('./base/mixins.scss');
+@import url('./base/configuration.scss');
+
+/*css libraries*/
+/*@import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');*/
+@import url('../node_modules/primeicons/primeicons.css');
+@import url('../node_modules/primeng/resources/themes/saga-blue/theme.css');
+@import url('../node_modules/primeng/resources/primeng.min.css');
+@import url('../node_modules/primeflex/primeflex.css');
+
+/*Shared*/
+@import url('./apps/admin/shell.scss');
+
+/*Libs*/
+@import url('./libs/ui/ui.scss');
+@import url('./libs/ui/ui.scss');
