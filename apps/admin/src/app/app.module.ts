@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { CategoriesListComponent } from './categories/categories-list/categories-list.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
     DashboardComponent,
     ShellComponent,
     SidebarComponent,
+    CategoriesListComponent,
   ],
   imports: [
     BrowserModule,
