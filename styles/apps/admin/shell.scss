@@ -15,6 +15,7 @@
     width: 175px;
     background-color: black;
     height: 100%;
+    top: 0;
 
     .logo {
       padding: 20px;
@@ -38,27 +39,31 @@
             padding: 10px 15px;
             display: block;
             width: 100%;
+
+            &:hover {
+              background-color: #19487b;
+            }
+
             i {
               margin-right: 8px;
               margin-top: -2px;
               float: left;
             }
-            &:hover {
-              background-color: #19487b;
+
+            &.logout {
+              color: #4a97e9;
             }
 
             &.active {
               color: #45af7f;
             }
           }
-
-          &.logout {
-            a {
-              color: #4a97e9;
-            }
-          }
         }
       }
     }
+  }
+
+  &-page {
+    padding: 15px;
   }
 }
