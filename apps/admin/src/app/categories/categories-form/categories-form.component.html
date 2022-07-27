@@ -1,0 +1,44 @@
+<p-toast></p-toast>
+<div class="admin-page">
+    <p-card header="Add Category" subheader="You can add or edit categories here">
+      <div class="p-grid">
+        <div class="p-col-12">
+          <p-toolbar>
+            <div class="ui-toolbar-group-left"></div>
+            <div class="ui-toolbar-group-right">
+              <p-button
+                label="Create"
+                styleClass="p-button-primary mr-2"
+                icon="pi pi-plus"
+                (onClick)="onSubmit()"
+              ></p-button>
+              <p-button
+              label="Cancel"
+              styleClass="p-button-secondary"
+              icon="pi pi-arrow-circle-left"
+            ></p-button>
+            </div>
+          </p-toolbar>
+        </div>
+      </div>
+      <div class="p-grid">
+        <div class="p-col-12 pt-4">
+            <form [formGroup]="form">
+                <div class="formgrid grid">
+                    <div class="field col">
+                        <label for="name">Name </label>
+                        <input formControlName="name" id="name" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                        <small *ngIf="form.get('name')!.invalid && isSubmited" class="p-error">Name is required</small>
+                    </div>
+                    <div class="field col">
+                        <label for="icon">Icon </label>
+                        <input formControlName="icon" id="icon" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                        <small *ngIf="form.get('icon')!.invalid && isSubmited" class="p-error">Icon is required</small>
+                    </div>
+                </div>
+            </form>
+        </div>
+      </div>
+    </p-card>
+  </div>
+  
