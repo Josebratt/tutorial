@@ -1,6 +1,7 @@
 import { CategoriesService, Category } from '@tutorial/products';
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'admin-categories-list',
@@ -16,16 +17,21 @@ export class CategoriesListComponent implements OnInit {
     private categoriesService:CategoriesService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
     this._getCategory();
   }
 
-  _getCategory(){
+  private _getCategory(){
     this.categoriesService.getCategories().subscribe(
       cats => this.categories = cats
     )
+  }
+
+  updateCategory(categoryId: string) {
+    this.router.navigateByUrl(`categories/form/${categoryId}`);
   }
 
   deleteCategory(categoryId: string){
