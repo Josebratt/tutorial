@@ -1,5 +1,5 @@
 export class Category {
-    id = '';
-    name = '';
-    icon = '';
+    id? = '';
+    name? = '';
+    icon? = '';
 }
