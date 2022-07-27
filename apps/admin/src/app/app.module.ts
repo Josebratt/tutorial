@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+import { ColorPickerModule } from 'primeng/colorpicker';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
@@ -28,6 +29,7 @@ const UX_MODULE = [
   ButtonModule,
   ConfirmDialogModule,
   CardModule,
+  ColorPickerModule,
   TableModule,
   InputTextModule,
   ToastModule,
@@ -42,7 +44,8 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'categories', component: CategoriesListComponent },
-      { path: 'categories/form', component: CategoriesFormComponent }
+      { path: 'categories/form', component: CategoriesFormComponent },
+      { path: 'categories/form/:id', component: CategoriesFormComponent }
     ]
   }
 ];
