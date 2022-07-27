@@ -1,13 +1,13 @@
 <p-toast></p-toast>
 <div class="admin-page">
-    <p-card header="Add Category" subheader="You can add or edit categories here">
+    <p-card [header]="editmode ? 'Edit Category':'Add Category'" subheader="You can add or edit categories here">
       <div class="p-grid">
         <div class="p-col-12">
           <p-toolbar>
             <div class="ui-toolbar-group-left"></div>
             <div class="ui-toolbar-group-right">
               <p-button
-                label="Create"
+                [label]="editmode ? 'Update': 'Create'"
                 styleClass="p-button-primary mr-2"
                 icon="pi pi-plus"
                 (onClick)="onSubmit()"
@@ -16,6 +16,7 @@
               label="Cancel"
               styleClass="p-button-secondary"
               icon="pi pi-arrow-circle-left"
+              (onClick)="cancel()"
             ></p-button>
             </div>
           </p-toolbar>
@@ -24,7 +25,7 @@
       <div class="p-grid">
         <div class="p-col-12 pt-4">
             <form [formGroup]="form">
-                <div class="formgrid grid">
+                <div class="fluid formgrid grid">
                     <div class="field col">
                         <label for="name">Name </label>
                         <input formControlName="name" id="name" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
@@ -35,7 +36,12 @@
                         <input formControlName="icon" id="icon" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
                         <small *ngIf="form.get('icon')!.invalid && isSubmited" class="p-error">Icon is required</small>
                     </div>
+                    <div class="field p-col">
+                      <label for="color">Color</label> <br>
+                      <p-colorPicker formControlName="color"></p-colorPicker>
+                    </div>
                 </div>
+                
             </form>
         </div>
       </div>
