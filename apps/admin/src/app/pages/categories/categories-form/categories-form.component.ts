@@ -14,8 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CategoriesFormComponent implements OnInit {
   form!: FormGroup;
-  // eslint-disable-next-line @typescript-eslint/no-inferrable-types
-  isSubmited: boolean = false;
+  isSubmited = false;
   editmode = false;
   currentCategoryId = '';
 
