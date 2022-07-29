@@ -11,9 +11,11 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { EditorModule } from 'primeng/editor';
 import { TableModule } from 'primeng/table';
+import { InputMaskModule } from 'primeng/inputmask';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
+import { PaginatorModule } from 'primeng/paginator';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 
@@ -29,6 +31,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProductsListComponent } from './pages/products/products-list/products-list.component';
 import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
+import { UsersListComponent } from './pages/users/users-list/users-list.component';
+import { UsersFormComponent } from './pages/users/users-form/users-form.component';
 
 
 const UX_MODULE = [
@@ -39,9 +43,11 @@ const UX_MODULE = [
   DropdownModule,
   EditorModule,
   TableModule,
+  InputMaskModule,
   InputNumberModule,
   InputSwitchModule,
   InputTextModule,
+  PaginatorModule,
   ToastModule,
   ToolbarModule
 ]
@@ -58,7 +64,10 @@ const routes: Routes = [
       { path: 'categories/form/:id', component: CategoriesFormComponent },
       { path: 'products', component: ProductsListComponent },
       { path: 'products/form', component: ProductsFormComponent },
-      { path: 'products/form/:id', component: ProductsFormComponent }
+      { path: 'products/form/:id', component: ProductsFormComponent },
+      { path: 'users', component: UsersListComponent },
+      { path: 'users/form', component: UsersFormComponent },
+      { path: 'users/form/:id', component: UsersFormComponent }
     ]
   }
 ];
@@ -74,6 +83,8 @@ const routes: Routes = [
     CategoriesFormComponent,
     ProductsListComponent,
     ProductsFormComponent,
+    UsersListComponent,
+    UsersFormComponent,
   ],
   imports: [
     BrowserModule,
