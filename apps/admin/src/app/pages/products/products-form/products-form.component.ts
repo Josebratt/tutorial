@@ -20,9 +20,9 @@ export class ProductsFormComponent implements OnInit {
   form!: FormGroup;
   isSubmited = false;
   editmode = false;
-  currentCategoryId = '';
+  currentProductId = '';
   categories: Category[] = [];
-  imageDisplay!: string | ArrayBuffer | null;
+  imageDisplay? = '';
   imageSelected = '';
 
   constructor(
@@ -37,6 +37,7 @@ export class ProductsFormComponent implements OnInit {
   ngOnInit(): void {
     this._initForm();
     this._getCategories();
+    this._checkEditMode();
   }
   private _initForm() {
     this.form = this.formBuilder.group({
@@ -47,7 +48,7 @@ export class ProductsFormComponent implements OnInit {
       countInStock: ['', Validators.required],
       description: ['', Validators.required],
       richDescription: [''],
-      image: [''],
+      image: ['', Validators.required],
       isFeatured: [false],
     });
   }
@@ -60,28 +61,24 @@ export class ProductsFormComponent implements OnInit {
       return;
     }
 
-    const product: Product = {
-      name: this.form.get('name')?.value,
-      brand: this.form.get('brand')?.value,
-      price: this.form.get('price')?.value,
-      countInStock: this.form.get('countInStock')?.value,
-      category: this.form.get('category')?.value,
-      isFeatured: this.form.get('isFeatured')?.value,
-      description: this.form.get('description')?.value,
-      richDescription: this.form.get('richDescription')?.value,
-      image: '',
-    };
-
     const productFormData = new FormData();
     Object.keys(this.form.controls).map((key) => {
       productFormData.append(key, this.form.controls[key].value);
       console.log(this.form.controls[key].value);
     });
 
-    this._addProduct(productFormData);
+    if (this.editmode) {
+      this._updateProduct(productFormData);
+    } else {
+      this._addProduct(productFormData);
+    }
+
+    
   }
 
-  cancel() {}
+  cancel() {
+    this.location.back();
+  }
 
   private _getCategories() {
     this.categoriesService.getCategories().subscribe((data) => {
@@ -122,7 +119,48 @@ export class ProductsFormComponent implements OnInit {
     );
   }
 
-  // get productForm() {
-  //   return this.form.controls;
-  // }
+  //
+  private _updateProduct(productFormData: FormData, ) {
+    this.productsService.updateProduct(productFormData, this.currentProductId ).subscribe(
+      (category: Category) => {
+        this.messageService.add({severity:'success', summary: 'Success Message', detail: `Category ${category.name} is updated`});
+        timer(2000).subscribe(
+          t => this.location.back()
+        )
+      }, (error) => {
+        this.messageService.add({severity:'error', summary: 'Error Message', detail: `Category ${error.message} is not updated`});
+    });
+  }
+  // get the id to update
+  private _checkEditMode() {
+    let id = '';
+    this.route.params.subscribe(
+      params => {
+        id = params['id']
+        if (id) {
+          this.editmode = true;
+          this.currentProductId = id;
+          this.productsService.getProduct(id).subscribe(
+            product => {
+              this.form.get('name')?.setValue(product.name);
+              this.form.get('brand')?.setValue(product.brand);
+              this.form.get('price')?.setValue(product.price);
+              this.form.get('category')?.setValue(product.category?.id);
+              this.form.get('countInStock')?.setValue(product.countInStock);
+              this.form.get('description')?.setValue(product.description);
+              this.form.get('richDescription')?.setValue(product.richDescription);
+              this.form.get('isFeatured')?.setValue(product.isFeatured);
+              this.imageDisplay = product.image;
+              this.form.get('image')?.setValidators([]);
+              this.form.get('image')?.updateValueAndValidity();
+
+            }
+          )
+        }
+      }
+    )
+  }
+
+
+
 }
