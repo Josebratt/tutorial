@@ -28,7 +28,7 @@
     <div class="p-grid">
       <div class="p-col-12 pt-4">
         <form [formGroup]="form">
-          <div class="formgrid grid">
+          <div class="fluid formgrid grid">
             <div class="field col">
               <label for="name">Name </label>
               <input
@@ -145,6 +145,11 @@
                 accept="image/*"
                 (change)="imageUpload($event)"
               />
+              <small
+                *ngIf="form.get('image')!.invalid && isSubmited"
+                class="p-error"
+                >Image is required</small
+              >
               <div class="p-col-2 p-mt-2 p-pl-0">
                 <img style="width: 100px" [src]="imageDisplay" alt="" />
               </div>
