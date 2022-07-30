@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { User, UsersService } from '@tutorial/users';
 import { MessageService } from 'primeng/api';
 import { Location } from '@angular/common';
 import { timer } from 'rxjs';
+import * as countriesLib from "i18n-iso-countries";
+declare const require: (arg0: string) => countriesLib.LocaleData;
 
 @Component({
   selector: 'admin-users-form',
@@ -18,7 +20,7 @@ export class UsersFormComponent implements OnInit {
   isSubmitted = false;
   editmode = false;
   currentUserId = '';
-  countries = [];
+  countries: any[] = [];
 
   constructor(
     private messageService: MessageService,
@@ -31,6 +33,7 @@ export class UsersFormComponent implements OnInit {
   ngOnInit(): void {
     this._initUserForm();
     this._checkEditMode();
+    this._getcontries();
   }
 
   private _initUserForm() {
@@ -56,6 +59,7 @@ export class UsersFormComponent implements OnInit {
     const user: User = {
       id: this.currentUserId,
       name: this.form.get('name')?.value,
+      password: this.form.get('password')?.value,
       email: this.form.get('email')?.value, 
       phone: this.form.get('phone')?.value, 
       isAdmin: this.form.get('isAdmin')?.value, 
@@ -149,8 +153,21 @@ export class UsersFormComponent implements OnInit {
     this.location.back();
   }
 
-  get fc(){
+  get fc(): { [key: string]: AbstractControl } {
     return this.form.controls;
+  }
+
+  //
+  private _getcontries() {
+    countriesLib.registerLocale(require("i18n-iso-countries/langs/en.json"));
+    this.countries = Object.entries(countriesLib.getNames("en", {select: "official"})).map(
+      (entry) => {
+        return {
+          id: entry[0],
+          name: entry[1]
+        }
+      }
+    );  
   }
 
 }
