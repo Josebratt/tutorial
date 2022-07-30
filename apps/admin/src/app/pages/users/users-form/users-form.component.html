@@ -7,8 +7,8 @@
     <div class="p-grid">
       <div class="p-col-12">
         <p-toolbar>
-          <div class="p-toolbar-group-left"></div>
-          <div class="p-toolbar-group-right">
+          <div class="ui-toolbar-group-left"></div>
+          <div class="ui-toolbar-group-right">
             <p-button
               styleClass="p-button-primary mr-2"
               [label]="editmode ? 'Update' : 'Create'"
@@ -29,7 +29,7 @@
       <div class="p-col-12 pt-4">
         <form [formGroup]="form">
           <div class="fluid formgrid grid">
-            <div class="field col-4">
+            <div class="field col">
               <label for="name">Name</label>
               <input formControlName="name" id="name" type="text" pInputText />
               <small
@@ -38,7 +38,7 @@
                 >Name is required</small
               >
             </div>
-            <div class="field col-4">
+            <div class="field col">
               <label for="email">Email</label>
               <input
                 formControlName="email"
@@ -47,17 +47,17 @@
                 pInputText
               />
               <small
-                *ngIf="form.get('email')!.invalid && isSubmitted"
+                *ngIf="isSubmitted && fc['email'].errors"
                 class="p-error"
-                ><span *ngIf="form.get('email')!.errors"
+                ><span *ngIf="fc['email'].errors!['required']"
                   >email is required</span
                 >
-                <span *ngIf="form.get('email')!.invalid"
+                <span *ngIf="fc['email'].errors!['email']"
                   >email is invalid</span
                 ></small
               >
             </div>
-            <div class="field col-4">
+            <div class="field col">
               <label for="password">Password</label>
               <input
                 formControlName="password"
