@@ -32,7 +32,7 @@
               <td>{{ user.name }}</td>
               <td>{{ user.email }}</td>
               <td>
-                <!-- <p-tag
+                <p-tag
                   *ngIf="user.isAdmin"
                   icon="pi pi-check"
                   severity="success"
@@ -43,19 +43,19 @@
                   icon="pi pi-times"
                   severity="danger"
                   [rounded]="true"
-                ></p-tag> -->
+                ></p-tag>
               </td>
               <td>{{ user.country }}</td>
               <td>
                 <p-button
+                  (click)="updateUser(user.id)"
+                  styleClass="p-button-success mr-2"
+                  icon="pi pi-pencil"
+                ></p-button>
+                <p-button
                   (click)="deleteUser(user.id)"
                   styleClass="p-button-danger p-mr-2"
                   icon="pi pi-trash"
-                ></p-button>
-                <p-button
-                  (click)="updateUser(user.id)"
-                  styleClass="p-button-success"
-                  icon="pi pi-pencil"
                 ></p-button>
               </td>
             </tr>
