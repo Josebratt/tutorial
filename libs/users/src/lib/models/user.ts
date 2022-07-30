@@ -1,8 +1,8 @@
 export class User {
     id?: string;
     name='';
-    password='';
-    email='';
+    passwordHash?: string;
+    email?: string;
     phone?: string;
     token?: string;
     isAdmin?: true;
