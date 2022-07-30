@@ -20,7 +20,7 @@ export class UsersFormComponent implements OnInit {
   isSubmitted = false;
   editmode = false;
   currentUserId = '';
-  countries: any[] = [];
+  countries: unknown[] = [];
 
   constructor(
     private messageService: MessageService,
