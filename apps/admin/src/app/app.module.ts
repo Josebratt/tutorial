@@ -10,12 +10,14 @@ import { ColorPickerModule } from 'primeng/colorpicker';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { EditorModule } from 'primeng/editor';
-import { TableModule } from 'primeng/table';
+import { FieldsetModule } from 'primeng/fieldset';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
 import { PaginatorModule } from 'primeng/paginator';
+import { TableModule } from 'primeng/table';
+import { TagModule } from 'primeng/tag';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 
@@ -33,6 +35,9 @@ import { ProductsListComponent } from './pages/products/products-list/products-l
 import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
 import { UsersListComponent } from './pages/users/users-list/users-list.component';
 import { UsersFormComponent } from './pages/users/users-form/users-form.component';
+import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
+import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
+import { UsersModule } from '@tutorial/users';
 
 
 const UX_MODULE = [
@@ -42,12 +47,14 @@ const UX_MODULE = [
   ColorPickerModule,
   DropdownModule,
   EditorModule,
-  TableModule,
+  FieldsetModule,
   InputMaskModule,
   InputNumberModule,
   InputSwitchModule,
   InputTextModule,
   PaginatorModule,
+  TableModule,
+  TagModule,
   ToastModule,
   ToolbarModule
 ]
@@ -67,7 +74,9 @@ const routes: Routes = [
       { path: 'products/form/:id', component: ProductsFormComponent },
       { path: 'users', component: UsersListComponent },
       { path: 'users/form', component: UsersFormComponent },
-      { path: 'users/form/:id', component: UsersFormComponent }
+      { path: 'users/form/:id', component: UsersFormComponent },
+      { path: 'orders', component: OrdersListComponent },
+      { path: 'orders/:id', component: OrdersDetailComponent },
     ]
   }
 ];
@@ -85,6 +94,8 @@ const routes: Routes = [
     ProductsFormComponent,
     UsersListComponent,
     UsersFormComponent,
+    OrdersListComponent,
+    OrdersDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,7 +104,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ...UX_MODULE
+    ...UX_MODULE,
+    UsersModule
   ],
   providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent],
