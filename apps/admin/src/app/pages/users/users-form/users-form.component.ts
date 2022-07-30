@@ -59,15 +59,15 @@ export class UsersFormComponent implements OnInit {
     const user: User = {
       id: this.currentUserId,
       name: this.form.get('name')?.value,
-      password: this.form.get('password')?.value,
-      email: this.form.get('email')?.value, 
-      phone: this.form.get('phone')?.value, 
-      isAdmin: this.form.get('isAdmin')?.value, 
-      street: this.form.get('street')?.value, 
-      apartment: this.form.get('apartment')?.value, 
-      zip: this.form.get('zip')?.value, 
-      city: this.form.get('city')?.value, 
-      country: this.form.get('country')?.value, 
+      passwordHash: this.form.get('password')?.value,
+      email: this.form.get('email')?.value,
+      phone: this.form.get('phone')?.value,
+      isAdmin: this.form.get('isAdmin')?.value,
+      street: this.form.get('street')?.value,
+      apartment: this.form.get('apartment')?.value,
+      zip: this.form.get('zip')?.value,
+      city: this.form.get('city')?.value,
+      country: this.form.get('country')?.value,
     };
     if (this.editmode) {
       this._updateUser(user);
@@ -104,25 +104,25 @@ export class UsersFormComponent implements OnInit {
     this.route.params.subscribe(
       (params) => {
         id = params['id']
-      if (id) {
-        this.editmode = true;
-        this.currentUserId = id;
-        this.usersService.getUser(id).subscribe((user) => {
-          this.form.get('name')?.setValue(user.name);
-          this.form.get('email')?.setValue(user.email);
-          this.form.get('phone')?.setValue(user.phone);
-          this.form.get('isAdmin')?.setValue(user.isAdmin);
-          this.form.get('street')?.setValue(user.street);
-          this.form.get('apartment')?.setValue(user.apartment);
-          this.form.get('zip')?.setValue(user.zip);
-          this.form.get('city')?.setValue(user.city);
-          this.form.get('country')?.setValue(user.country);
+        if (id) {
+          this.editmode = true;
+          this.currentUserId = id;
+          this.usersService.getUser(id).subscribe((user) => {
+            this.form.get('name')?.setValue(user.name);
+            this.form.get('email')?.setValue(user.email);
+            this.form.get('phone')?.setValue(user.phone);
+            this.form.get('isAdmin')?.setValue(user.isAdmin);
+            this.form.get('street')?.setValue(user.street);
+            this.form.get('apartment')?.setValue(user.apartment);
+            this.form.get('zip')?.setValue(user.zip);
+            this.form.get('city')?.setValue(user.city);
+            this.form.get('country')?.setValue(user.country);
 
-          this.form.get('password')?.setValidators([]);
-          this.form.get('password')?.updateValueAndValidity();
-        });
-      }
-    });
+            this.form.get('password')?.setValidators([]);
+            this.form.get('password')?.updateValueAndValidity();
+          });
+        }
+      });
   }
 
   private _updateUser(user: User) {
@@ -160,14 +160,14 @@ export class UsersFormComponent implements OnInit {
   //
   private _getcontries() {
     countriesLib.registerLocale(require("i18n-iso-countries/langs/en.json"));
-    this.countries = Object.entries(countriesLib.getNames("en", {select: "official"})).map(
+    this.countries = Object.entries(countriesLib.getNames("en", { select: "official" })).map(
       (entry) => {
         return {
           id: entry[0],
           name: entry[1]
         }
       }
-    );  
+    );
   }
 
 }
