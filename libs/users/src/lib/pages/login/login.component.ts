@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'users-login',
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private auth: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -25,6 +27,17 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
+  }
+
+  onSubmit() {
+    this.isSubmitted = true;
+    if (this.loginFormGroup.invalid) return;
+
+    this.auth.login(this.loginForm['email'].value, this.loginForm['password'].value).subscribe(
+      user => {
+        console.log(user);
+      } 
+    )
   }
 
   get loginForm(): { [key: string]: AbstractControl } {
