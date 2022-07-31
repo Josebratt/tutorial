@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
-import { UsersModule } from '@tutorial/users';
+import { AuthGuardGuard, UsersModule } from '@tutorial/users';
 
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -66,6 +66,7 @@ const routes: Routes = [
   {
     path: '', 
     component: ShellComponent,
+    canActivate: [AuthGuardGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'categories', component: CategoriesListComponent },
