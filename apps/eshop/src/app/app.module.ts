@@ -36,7 +36,7 @@ const routes: Routes = [
     UiModule,
     ProductsModule,
     BrowserAnimationsModule,
-    AccordionModule,
+    AccordionModule
   ],
   providers: [],
   bootstrap: [AppComponent],
