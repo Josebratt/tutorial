@@ -12,6 +12,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProductlistComponent } from './pages/productlist/productlist.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { NavComponent } from './shared/nav/nav.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
     ProductlistComponent,
     HeaderComponent,
     FooterComponent,
+    NavComponent,
   ],
   imports: [
     BrowserModule,
