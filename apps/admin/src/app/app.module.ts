@@ -1,10 +1,10 @@
+import { RoutingModule } from './routing.routes';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { AuthGuardGuard, UsersModule } from '@tutorial/users';
+import { JwtInterceptor, UsersModule } from '@tutorial/users';
 
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -25,7 +25,6 @@ import { ToolbarModule } from 'primeng/toolbar';
 
 import { AppComponent } from './app.component';
 import { NxWelcomeComponent } from './nx-welcome.component';
-import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
@@ -62,28 +61,6 @@ const UX_MODULE = [
 ]
 
 
-const routes: Routes = [
-  {
-    path: '', 
-    component: ShellComponent,
-    canActivate: [AuthGuardGuard],
-    children: [
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'categories', component: CategoriesListComponent },
-      { path: 'categories/form', component: CategoriesFormComponent },
-      { path: 'categories/form/:id', component: CategoriesFormComponent },
-      { path: 'products', component: ProductsListComponent },
-      { path: 'products/form', component: ProductsFormComponent },
-      { path: 'products/form/:id', component: ProductsFormComponent },
-      { path: 'users', component: UsersListComponent },
-      { path: 'users/form', component: UsersFormComponent },
-      { path: 'users/form/:id', component: UsersFormComponent },
-      { path: 'orders', component: OrdersListComponent },
-      { path: 'orders/:id', component: OrdersDetailComponent },
-    ]
-  }
-];
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -103,14 +80,22 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes, { initialNavigation: 'enabledBlocking' }),
+    RoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     ...UX_MODULE,
     UsersModule
   ],
-  providers: [MessageService, ConfirmationService],
+  providers: [ 
+    MessageService, 
+    ConfirmationService,
+    { 
+      provide: HTTP_INTERCEPTORS, 
+      useClass: JwtInterceptor,
+      multi: true
+    }
+  ], 
   bootstrap: [AppComponent],
 })
 export class AppModule {}
