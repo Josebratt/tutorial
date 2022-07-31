@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { LocalstorageService } from '../../services/localstorage.service';
 
 @Component({
   selector: 'users-login',
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private auth: AuthService,
+    private localstorageService: LocalstorageService,
   ) { }
 
   ngOnInit(): void {
@@ -37,7 +39,10 @@ export class LoginComponent implements OnInit {
     if (this.loginFormGroup.invalid) return;
 
     this.auth.login(this.loginForm['email'].value, this.loginForm['password'].value).subscribe({
-      next: (user) => console.log(user),
+      next: (user) => {
+        this.authError = false;
+        this.localstorageService.setToken(user.token);
+      },
       error: (error: HttpErrorResponse) => {
         this.authError = true;
         if (error.status !== 400) {
