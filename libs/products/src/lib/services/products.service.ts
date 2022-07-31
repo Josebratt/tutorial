@@ -35,8 +35,8 @@ export class ProductsService {
     return this.http.put<Product>(`${this.apiURLProducts}/${productId}`, productData);
   }
 
-  // delete data
-  // deleteCategory(categoryId: string): Observable<Category> {
-  //   return this.http.delete<Category>(`${this.apiURLCategories}/${categoryId}`);
-  // }
+  //delete data
+  deleteProduct(productId: string): Observable<Product> {
+    return this.http.delete<Product>(`${this.apiURLProducts}/${productId}`);
+  }
 }
