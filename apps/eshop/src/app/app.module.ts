@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { NxWelcomeComponent } from './nx-welcome.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { Routes, RouterModule } from '@angular/router';
-import { ProductlistComponent } from './pages/productlist/productlist.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NavComponent } from './shared/nav/nav.component';
@@ -18,7 +17,6 @@ import { ProductsModule } from '@tutorial/products';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
-/*   { path: 'products', component: ProductlistComponent }, */
 ];
 
 @NgModule({
@@ -26,7 +24,6 @@ const routes: Routes = [
     AppComponent,
     NxWelcomeComponent,
     HomePageComponent,
-    ProductlistComponent,
     HeaderComponent,
     FooterComponent,
     NavComponent,
