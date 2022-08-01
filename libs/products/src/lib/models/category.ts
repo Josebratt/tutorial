@@ -3,4 +3,6 @@ export class Category {
     name? = '';
     icon? = '';
     color? = '';
+    checked = false;
+
 }
