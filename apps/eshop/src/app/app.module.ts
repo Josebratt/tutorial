@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { UiModule } from '@tutorial/ui';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -33,6 +34,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
+    HttpClientModule,
     UiModule,
     ProductsModule,
     BrowserAnimationsModule,
