@@ -18,7 +18,7 @@ import { ProductsModule } from '@tutorial/products';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
-  { path: 'products', component: ProductlistComponent },
+/*   { path: 'products', component: ProductlistComponent }, */
 ];
 
 @NgModule({
